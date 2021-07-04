@@ -23,11 +23,10 @@ const getContactById = async (contactId) => {
 
 const removeContact = async (contactId) => {
   try {
-    const filtered = contacts.filter((contact) => +contact.id !== +contactId)
-
-    if (contacts.length === filtered.length) return false
-
-    await fs.writeFile(contactPath, JSON.stringify(filtered, null, 2))
+    const indexToDelete = contacts.findIndex(contact => +contact.id === +contactId)
+    if (indexToDelete < 0) return
+    contacts.splice(indexToDelete, 1)
+    await fs.writeFile(contactPath, JSON.stringify(contacts, null, 2))
     return true
   } catch (error) {
     console.log(error.message)
@@ -52,7 +51,7 @@ const addContact = async (body) => {
 
 const updateContact = async (contactId, body) => {
   try {
-    const toUpdate = await contacts.find(
+    const toUpdate = contacts.find(
       (contact) => +contact.id === +contactId
     )
     if (!toUpdate) return false
