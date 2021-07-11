@@ -1,19 +1,19 @@
-const express = require("express");
-const router = express.Router();
-const task = require("../../controller");
+const express = require('express')
+const router = express.Router()
+const task = require('../../controller')
 
 // const validation = require("../../services/validation");
 
-router.get("/", task.getAll);
+router.get('/', task.getAll)
 
-router.get("/:contactId", task.getById);
+router.get('/:contactId', task.getById)
 
-router.post("/", task.add);
+router.post('/', task.add)
 
-router.patch("/:contactId", task.update);
+router.patch('/:contactId', task.update)
 
-router.patch("/:contactId/favorite", task.updateStatus);
+router.patch('/:contactId/favorite', task.updateStatus)
 
-router.delete("/:contactId", task.remove);
+router.delete('/:contactId', task.remove)
 
-module.exports = router;
+module.exports = router

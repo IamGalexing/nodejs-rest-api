@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require('joi')
 
 const updateContact = Joi.object()
   .keys({
@@ -7,6 +7,6 @@ const updateContact = Joi.object()
     phone: Joi.string(),
     favorite: Joi.boolean(),
   })
-  .min(1);
+  .min(1)
 
-module.exports = updateContact;
+module.exports = updateContact
