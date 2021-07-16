@@ -1,44 +1,19 @@
 const express = require('express')
 const router = express.Router()
+const task = require('../../controller')
 
-const task = require('../../model/index')
-const validation = require('../../utils/validate')
+// const validation = require("../../services/validation");
 
-router.get('/', async (req, res, next) => {
-  const result = await task.listContacts()
-  result ? res.json(result) : next()
-})
+router.get('/', task.getAll)
 
-router.get('/:contactId', async (req, res, next) => {
-  const result = await task.getContactById(req.params.contactId)
-  result ? res.json(result) : next()
-})
+router.get('/:contactId', task.getById)
 
-router.post('/', async (req, res, next) => {
-  const { error } = validation.addContact.validate(req.body)
-  if (error) {
-    res.status(400).json({ message: 'missing required name field' })
-    return
-  }
+router.post('/', task.add)
 
-  const result = await task.addContact(req.body)
-  res.status(201).json(result)
-})
+router.patch('/:contactId', task.update)
 
-router.delete('/:contactId', async (req, res, next) => {
-  const result = await task.removeContact(req.params.contactId)
-  result ? res.json({ message: 'contact deleted' }) : next()
-})
+router.patch('/:contactId/favorite', task.updateStatus)
 
-router.patch('/:contactId', async (req, res, next) => {
-  const { error } = validation.updateContact.validate(req.body)
-  if (error) {
-    res.status(400).json({ message: 'missing fields' })
-    return
-  }
-
-  const result = await task.updateContact(req.params.contactId, req.body)
-  result ? res.json(result) : next()
-})
+router.delete('/:contactId', task.remove)
 
 module.exports = router
