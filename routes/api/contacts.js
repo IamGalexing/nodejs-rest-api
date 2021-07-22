@@ -1,19 +1,18 @@
 const express = require('express')
 const router = express.Router()
-const task = require('../../controller')
+const { ctrlContact } = require('../../controllers')
+const { isLoggedIn } = require('../../middlewares')
 
-// const validation = require("../../services/validation");
+router.get('/', isLoggedIn, ctrlContact.getAll)
 
-router.get('/', task.getAll)
+router.get('/:contactId', isLoggedIn, ctrlContact.getById)
 
-router.get('/:contactId', task.getById)
+router.post('/', isLoggedIn, ctrlContact.add)
 
-router.post('/', task.add)
+router.patch('/:contactId', isLoggedIn, ctrlContact.update)
 
-router.patch('/:contactId', task.update)
+router.patch('/:contactId/favorite', isLoggedIn, ctrlContact.updateStatus)
 
-router.patch('/:contactId/favorite', task.updateStatus)
-
-router.delete('/:contactId', task.remove)
+router.delete('/:contactId', isLoggedIn, ctrlContact.remove)
 
 module.exports = router
