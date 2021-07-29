@@ -1,3 +1,4 @@
-const isLoggedIn = require('./isLoggedIn')
+const isLoggedIn = require("./isLoggedIn");
+const upload = require("./uploadImage");
 
-module.exports = { isLoggedIn }
+module.exports = { isLoggedIn, upload };
