@@ -1,5 +1,5 @@
 const service = require('../../services/fetch')
-const auth = require('../../services/validation/auth')
+const { auth } = require('../../services/validation/auth')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -17,6 +17,11 @@ const login = async (req, res, next) => {
     if (!user || !user.comparePassword(password)) {
       return res.status(401).json({
         message: 'Email or password is wrong',
+      })
+    }
+    if (!user.verify) {
+      return res.status(403).json({
+        message: 'Email not verified',
       })
     }
 

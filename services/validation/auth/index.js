@@ -1,3 +1,4 @@
 const auth = require('./auth')
+const newVerifyEmail = require('./newVerifyEmail')
 
-module.exports = auth
+module.exports = { auth, newVerifyEmail }

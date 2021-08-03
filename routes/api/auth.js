@@ -1,22 +1,26 @@
-const express = require("express");
-const router = express.Router();
-const { ctrlAuth } = require("../../controllers");
-const { isLoggedIn } = require("../../middlewares");
-const { upload } = require("../../middlewares");
+const express = require('express')
+const router = express.Router()
+const { ctrlAuth } = require('../../controllers')
+const { isLoggedIn } = require('../../middlewares')
+const { upload } = require('../../middlewares')
 
-router.post("/signup", ctrlAuth.register);
+router.post('/signup', ctrlAuth.register)
 
-router.post("/login", ctrlAuth.login);
+router.get('/verify/:verifyToken', ctrlAuth.verifyEmail)
 
-router.post("/logout", isLoggedIn, ctrlAuth.logout);
+router.post('/verify', ctrlAuth.sendNewVerifyEmail)
 
-router.get("/current", isLoggedIn, ctrlAuth.current);
+router.post('/login', ctrlAuth.login)
+
+router.post('/logout', isLoggedIn, ctrlAuth.logout)
+
+router.get('/current', isLoggedIn, ctrlAuth.current)
 
 router.patch(
-  "/avatar",
+  '/avatar',
   isLoggedIn,
-  upload.single("avatar"),
+  upload.single('avatar'),
   ctrlAuth.uploadAvatar
-);
+)
 
-module.exports = router;
+module.exports = router

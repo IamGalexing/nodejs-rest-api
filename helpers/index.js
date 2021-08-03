@@ -1,3 +1,4 @@
-const createFolderIfNotExist = require("./createFolderIfNotExist");
+const createFolderIfNotExist = require('./createFolderIfNotExist')
+const createEmailVerification = require('./createEmailVerification')
 
-module.exports = { createFolderIfNotExist };
+module.exports = { createFolderIfNotExist, createEmailVerification }
